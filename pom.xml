@@ -6,6 +6,7 @@
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-build</artifactId>
 	<version>${revision}</version>
+
 	<packaging>pom</packaging>
 	<name>Spring Boot Build</name>
 	<description>Spring Boot Build</description>
@@ -96,8 +97,9 @@
 			</activation>
 			<modules>
 				<module>spring-boot-project</module>
-				<module>spring-boot-samples</module>
-				<module>spring-boot-tests</module>
+				<!--<module>spring-boot-samples</module>-->
+				<!--<module>spring-boot-tests</module>-->
+				<module>spring-boot-learn</module>
 			</modules>
 		</profile>
 		<profile>

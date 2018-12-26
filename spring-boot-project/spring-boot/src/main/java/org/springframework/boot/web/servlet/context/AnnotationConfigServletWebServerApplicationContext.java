@@ -16,24 +16,19 @@
 
 package org.springframework.boot.web.servlet.context;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
-import org.springframework.context.annotation.AnnotationConfigRegistry;
-import org.springframework.context.annotation.AnnotationConfigUtils;
-import org.springframework.context.annotation.AnnotationScopeMetadataResolver;
-import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
-import org.springframework.context.annotation.ScopeMetadataResolver;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * {@link ServletWebServerApplicationContext} that accepts annotated classes as input - in
@@ -70,7 +65,10 @@ public class AnnotationConfigServletWebServerApplicationContext
 	 * {@linkplain #refresh refreshed}.
 	 */
 	public AnnotationConfigServletWebServerApplicationContext() {
+		// 创建注解bean解析类(创建 configurationClassPostProcess : beanFactory后置处理, 处理注解component等)
 		this.reader = new AnnotatedBeanDefinitionReader(this);
+
+		// 创建classPath 扫描器
 		this.scanner = new ClassPathBeanDefinitionScanner(this);
 	}
 

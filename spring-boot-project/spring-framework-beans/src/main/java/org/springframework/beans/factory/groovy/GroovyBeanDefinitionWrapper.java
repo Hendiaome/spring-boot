@@ -16,7 +16,12 @@
 
 package org.springframework.beans.factory.groovy;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import groovy.lang.GroovyObjectSupport;
+
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -26,10 +31,6 @@ import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.util.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Internal wrapper for a Spring BeanDefinition, allowing for Groovy-style

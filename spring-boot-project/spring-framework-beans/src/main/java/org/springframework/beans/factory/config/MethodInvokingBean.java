@@ -16,6 +16,8 @@
 
 package org.springframework.beans.factory.config;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.springframework.beans.TypeConverter;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;
@@ -24,8 +26,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.support.ArgumentConvertingMethodInvoker;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
-
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Simple method invoker bean: just invoking a target method, not expecting a result

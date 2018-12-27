@@ -16,14 +16,6 @@
 
 package org.springframework.cache.annotation;
 
-import org.springframework.cache.interceptor.CacheEvictOperation;
-import org.springframework.cache.interceptor.CacheOperation;
-import org.springframework.cache.interceptor.CachePutOperation;
-import org.springframework.cache.interceptor.CacheableOperation;
-import org.springframework.core.annotation.AnnotatedElementUtils;
-import org.springframework.lang.Nullable;
-import org.springframework.util.StringUtils;
-
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
@@ -32,6 +24,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import org.springframework.cache.interceptor.CacheEvictOperation;
+import org.springframework.cache.interceptor.CacheOperation;
+import org.springframework.cache.interceptor.CachePutOperation;
+import org.springframework.cache.interceptor.CacheableOperation;
+import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.lang.Nullable;
+import org.springframework.util.StringUtils;
 
 /**
  * Strategy implementation for parsing Spring's {@link Caching}, {@link Cacheable},

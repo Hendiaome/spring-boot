@@ -16,11 +16,11 @@
 
 package org.springframework.beans.factory.support;
 
-import org.springframework.lang.Nullable;
-import org.springframework.util.ObjectUtils;
-
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+
+import org.springframework.lang.Nullable;
+import org.springframework.util.ObjectUtils;
 
 /**
  * Represents an override of a method that looks up an object in the same IoC context.

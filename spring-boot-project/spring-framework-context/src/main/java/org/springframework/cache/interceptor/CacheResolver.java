@@ -16,9 +16,9 @@
 
 package org.springframework.cache.interceptor;
 
-import org.springframework.cache.Cache;
-
 import java.util.Collection;
+
+import org.springframework.cache.Cache;
 
 /**
  * Determine the {@link Cache} instance(s) to use for an intercepted method invocation.

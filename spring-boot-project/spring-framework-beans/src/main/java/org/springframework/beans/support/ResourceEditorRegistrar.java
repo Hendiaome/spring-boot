@@ -16,19 +16,6 @@
 
 package org.springframework.beans.support;
 
-import org.springframework.beans.PropertyEditorRegistrar;
-import org.springframework.beans.PropertyEditorRegistry;
-import org.springframework.beans.PropertyEditorRegistrySupport;
-import org.springframework.beans.propertyeditors.*;
-import org.springframework.core.env.PropertyResolver;
-import org.springframework.core.io.ContextResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceEditor;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.core.io.support.ResourceArrayPropertyEditor;
-import org.springframework.core.io.support.ResourcePatternResolver;
-import org.xml.sax.InputSource;
-
 import java.beans.PropertyEditor;
 import java.io.File;
 import java.io.InputStream;
@@ -36,6 +23,28 @@ import java.io.Reader;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.Path;
+
+import org.xml.sax.InputSource;
+
+import org.springframework.beans.PropertyEditorRegistrar;
+import org.springframework.beans.PropertyEditorRegistry;
+import org.springframework.beans.PropertyEditorRegistrySupport;
+import org.springframework.beans.propertyeditors.ClassArrayEditor;
+import org.springframework.beans.propertyeditors.ClassEditor;
+import org.springframework.beans.propertyeditors.FileEditor;
+import org.springframework.beans.propertyeditors.InputSourceEditor;
+import org.springframework.beans.propertyeditors.InputStreamEditor;
+import org.springframework.beans.propertyeditors.PathEditor;
+import org.springframework.beans.propertyeditors.ReaderEditor;
+import org.springframework.beans.propertyeditors.URIEditor;
+import org.springframework.beans.propertyeditors.URLEditor;
+import org.springframework.core.env.PropertyResolver;
+import org.springframework.core.io.ContextResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceEditor;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.ResourceArrayPropertyEditor;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
  * PropertyEditorRegistrar implementation that populates a given

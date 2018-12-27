@@ -16,11 +16,11 @@
 
 package org.springframework.cache.interceptor;
 
+import java.util.Collection;
+
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.lang.Nullable;
-
-import java.util.Collection;
 
 /**
  * A simple {@link CacheResolver} that resolves the {@link Cache} instance(s)

@@ -16,13 +16,13 @@
 
 package org.springframework.beans.propertyeditors;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceEditor;
-import org.springframework.util.Assert;
-
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.net.URL;
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceEditor;
+import org.springframework.util.Assert;
 
 /**
  * Editor for {@code java.net.URL}, to directly populate a URL property

@@ -16,9 +16,9 @@
 
 package org.springframework.cache.support;
 
-import org.springframework.lang.Nullable;
-
 import java.io.Serializable;
+
+import org.springframework.lang.Nullable;
 
 /**
  * Simple serializable class that serves as a {@code null} replacement

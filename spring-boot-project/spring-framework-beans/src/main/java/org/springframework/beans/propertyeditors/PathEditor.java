@@ -16,11 +16,6 @@
 
 package org.springframework.beans.propertyeditors;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceEditor;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.util.Assert;
-
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.net.URI;
@@ -28,6 +23,11 @@ import java.net.URISyntaxException;
 import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceEditor;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.util.Assert;
 
 /**
  * Editor for {@code java.nio.file.Path}, to directly populate a Path

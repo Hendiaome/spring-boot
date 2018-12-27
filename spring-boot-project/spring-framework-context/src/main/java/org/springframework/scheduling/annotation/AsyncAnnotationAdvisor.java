@@ -64,7 +64,7 @@ public class AsyncAnnotationAdvisor extends AbstractPointcutAdvisor implements B
 	 * Create a new {@code AsyncAnnotationAdvisor} for bean-style configuration.
 	 */
 	public AsyncAnnotationAdvisor() {
-		this(null, null);
+		this((Supplier<Executor>) null, (Supplier<AsyncUncaughtExceptionHandler>) null);
 	}
 
 	/**

@@ -16,9 +16,9 @@
 
 package org.springframework.beans.factory.parsing;
 
-import org.springframework.lang.Nullable;
-
 import java.util.LinkedList;
+
+import org.springframework.lang.Nullable;
 
 /**
  * Simple {@link LinkedList}-based structure for tracking the logical position during

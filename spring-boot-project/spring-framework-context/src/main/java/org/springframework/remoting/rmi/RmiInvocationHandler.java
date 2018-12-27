@@ -42,7 +42,7 @@ public interface RmiInvocationHandler extends Remote {
 	 * @see RmiServiceExporter#getServiceInterface()
 	 */
 	@Nullable
-	String getTargetInterfaceName() throws RemoteException;
+	public String getTargetInterfaceName() throws RemoteException;
 
 	/**
 	 * Apply the given invocation to the target object.
@@ -56,7 +56,7 @@ public interface RmiInvocationHandler extends Remote {
 	 * @throws InvocationTargetException if the method invocation resulted in an exception
 	 */
 	@Nullable
-	Object invoke(RemoteInvocation invocation)
+	public Object invoke(RemoteInvocation invocation)
 			throws RemoteException, NoSuchMethodException, IllegalAccessException, InvocationTargetException;
 
 }

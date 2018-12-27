@@ -16,9 +16,9 @@
 
 package org.springframework.cache;
 
-import org.springframework.lang.Nullable;
-
 import java.util.concurrent.Callable;
+
+import org.springframework.lang.Nullable;
 
 /**
  * Interface that defines common cache operations.

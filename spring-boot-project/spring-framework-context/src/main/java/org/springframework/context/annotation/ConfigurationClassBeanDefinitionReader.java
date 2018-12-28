@@ -134,14 +134,20 @@ class ConfigurationClassBeanDefinitionReader {
 			return;
 		}
 
+		// @import Configuration
 		if (configClass.isImported()) {
 			registerBeanDefinitionForImportedConfigurationClass(configClass);
 		}
+
+		// load bean方法
 		for (BeanMethod beanMethod : configClass.getBeanMethods()) {
 			loadBeanDefinitionsForBeanMethod(beanMethod);
 		}
 
+		// @import 导入类
 		loadBeanDefinitionsFromImportedResources(configClass.getImportedResources());
+
+		// @import ImportBeanDefinitionRegistrar
 		loadBeanDefinitionsFromRegistrars(configClass.getImportBeanDefinitionRegistrars());
 	}
 

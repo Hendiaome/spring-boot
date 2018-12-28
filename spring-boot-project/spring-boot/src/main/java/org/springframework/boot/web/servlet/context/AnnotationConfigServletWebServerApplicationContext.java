@@ -65,7 +65,7 @@ public class AnnotationConfigServletWebServerApplicationContext
 	 * {@linkplain #refresh refreshed}.
 	 */
 	public AnnotationConfigServletWebServerApplicationContext() {
-		// 创建注解bean解析类(创建 configurationClassPostProcess : beanFactory后置处理, 处理注解component等)
+		// 创建注解bean解析类(创建 ConfigurationClassPostProcess : beanFactory后置处理, 处理注解component等)
 		this.reader = new AnnotatedBeanDefinitionReader(this);
 
 		// 创建classPath 扫描器

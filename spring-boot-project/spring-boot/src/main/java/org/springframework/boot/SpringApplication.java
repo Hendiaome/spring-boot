@@ -279,15 +279,16 @@ public class SpringApplication {
 		listeners.starting();
 
 		try {
-			ApplicationArguments applicationArguments = new DefaultApplicationArguments(
-					args);
-			ConfigurableEnvironment environment = prepareEnvironment(listeners,
-					applicationArguments);
+			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
+			ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);
+
 			configureIgnoreBeanInfo(environment);
 			Banner printedBanner = printBanner(environment);
 
-			// 根据容器类型创建applicationContext
+			// 根据容器类型创建applicationContext(AnnotationConfigServletWebServerApplicationContext)
 			context = createApplicationContext();
+
+			// 错误报告器
 			exceptionReporters = getSpringFactoriesInstances(
 					SpringBootExceptionReporter.class,
 					new Class[] { ConfigurableApplicationContext.class }, context);
@@ -296,7 +297,7 @@ public class SpringApplication {
 			prepareContext(context, environment, listeners, applicationArguments,
 					printedBanner);
 
-			// 刷新上下文
+			// 刷新上下文(调用AbstractApplicationContext#refresh)
 			refreshContext(context);
 
 			afterRefresh(context, applicationArguments);

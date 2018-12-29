@@ -144,7 +144,7 @@ class ConfigurationClassBeanDefinitionReader {
 			loadBeanDefinitionsForBeanMethod(beanMethod);
 		}
 
-		// @import 导入类
+		// 加载之前 importResources 集合资源
 		loadBeanDefinitionsFromImportedResources(configClass.getImportedResources());
 
 		// @import ImportBeanDefinitionRegistrar
@@ -346,6 +346,7 @@ class ConfigurationClassBeanDefinitionReader {
 				try {
 					// Instantiate the specified BeanDefinitionReader
 					reader = readerClass.getConstructor(BeanDefinitionRegistry.class).newInstance(this.registry);
+
 					// Delegate the current ResourceLoader to it if possible
 					if (reader instanceof AbstractBeanDefinitionReader) {
 						AbstractBeanDefinitionReader abdr = ((AbstractBeanDefinitionReader) reader);
@@ -361,6 +362,7 @@ class ConfigurationClassBeanDefinitionReader {
 			}
 
 			// TODO SPR-6310: qualify relative path locations as done in AbstractContextLoader.modifyLocations
+			// XmlBeanDefinitionReader
 			reader.loadBeanDefinitions(resource);
 		});
 	}

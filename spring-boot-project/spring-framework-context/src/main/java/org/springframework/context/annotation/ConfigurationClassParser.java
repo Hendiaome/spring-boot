@@ -321,11 +321,11 @@ class ConfigurationClassParser {
 		}
 
 		// Process any @Import annotations
-		// 处理 import注解, autoConfig处理在此(学习点)
+		// step2: 处理 import注解, autoConfig处理在此(学习点)
 		processImports(configClass, sourceClass, getImports(sourceClass), true);
 
 		// Process any @ImportResource annotations
-		// 处理带 ImportResource(学习点)
+		// step3: 处理带 ImportResource(学习点)
 		AnnotationAttributes importResource =
 				AnnotationConfigUtils.attributesFor(sourceClass.getMetadata(), ImportResource.class);
 		if (importResource != null) {

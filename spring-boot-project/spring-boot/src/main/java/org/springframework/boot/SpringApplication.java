@@ -238,11 +238,19 @@ public class SpringApplication {
 	public SpringApplication(ResourceLoader resourceLoader, Class<?>... primarySources) {
 		this.resourceLoader = resourceLoader;
 		Assert.notNull(primarySources, "PrimarySources must not be null");
+
 		this.primarySources = new LinkedHashSet<>(Arrays.asList(primarySources));
+
+		// 容器类型
 		this.webApplicationType = WebApplicationType.deduceFromClasspath();
-		setInitializers((Collection) getSpringFactoriesInstances(
-				ApplicationContextInitializer.class));
+
+		// 初始化Initializer
+		setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextInitializer.class));
+
+		// 初始化Listener
 		setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));
+
+		// 推断主类
 		this.mainApplicationClass = deduceMainApplicationClass();
 	}
 
@@ -280,8 +288,11 @@ public class SpringApplication {
 
 		try {
 			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
+
+			// 准备环境
 			ConfigurableEnvironment environment = prepareEnvironment(listeners, applicationArguments);
 
+			// 打印banner
 			configureIgnoreBeanInfo(environment);
 			Banner printedBanner = printBanner(environment);
 
@@ -324,12 +335,14 @@ public class SpringApplication {
 		return context;
 	}
 
-	private ConfigurableEnvironment prepareEnvironment(
-			SpringApplicationRunListeners listeners,
-			ApplicationArguments applicationArguments) {
+	private ConfigurableEnvironment prepareEnvironment(SpringApplicationRunListeners listeners,
+													   ApplicationArguments applicationArguments) {
 		// Create and configure the environment
 		ConfigurableEnvironment environment = getOrCreateEnvironment();
+
+		// 配置环境
 		configureEnvironment(environment, applicationArguments.getSourceArgs());
+
 		listeners.environmentPrepared(environment);
 		bindToSpringApplication(environment);
 		if (!this.isCustomEnvironment) {
@@ -410,10 +423,13 @@ public class SpringApplication {
 			Class<?>[] parameterTypes, Object... args) {
 		ClassLoader classLoader = getClassLoader();
 		// Use names and ensure unique to protect against duplicates
-		Set<String> names = new LinkedHashSet<>(
-				SpringFactoriesLoader.loadFactoryNames(type, classLoader));
-		List<T> instances = createSpringFactoriesInstances(type, parameterTypes,
-				classLoader, args, names);
+
+		// 获取到的扩展类名存入set集合防止重复
+		Set<String> names = new LinkedHashSet<>(SpringFactoriesLoader.loadFactoryNames(type, classLoader));
+
+		// 创建扩展点实例
+		List<T> instances = createSpringFactoriesInstances(type, parameterTypes, classLoader, args, names);
+
 		AnnotationAwareOrderComparator.sort(instances);
 		return instances;
 	}
@@ -466,14 +482,18 @@ public class SpringApplication {
 	 * @see #configurePropertySources(ConfigurableEnvironment, String[])
 	 */
 	protected void configureEnvironment(ConfigurableEnvironment environment,
-			String[] args) {
+										String[] args) {
 		if (this.addConversionService) {
 			ConversionService conversionService = ApplicationConversionService
 					.getSharedInstance();
 			environment.setConversionService(
 					(ConfigurableConversionService) conversionService);
 		}
+
+		// 配置参数
 		configurePropertySources(environment, args);
+
+		// 配置profile
 		configureProfiles(environment, args);
 	}
 

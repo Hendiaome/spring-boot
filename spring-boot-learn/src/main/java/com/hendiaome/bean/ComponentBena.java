@@ -18,4 +18,8 @@ public class ComponentBena implements BeanPostProcessor {
 		//System.out.println("### 自定义 postProcessAfterInitialization 后置");
 		return bean;
 	}
+
+	public void foo() {
+		System.out.println("### foor");
+	}
 }

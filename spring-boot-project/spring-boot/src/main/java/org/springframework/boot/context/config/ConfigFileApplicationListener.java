@@ -168,14 +168,12 @@ public class ConfigFileApplicationListener
 		}
 	}
 
-	private void onApplicationEnvironmentPreparedEvent(
-			ApplicationEnvironmentPreparedEvent event) {
+	private void onApplicationEnvironmentPreparedEvent(ApplicationEnvironmentPreparedEvent event) {
 		List<EnvironmentPostProcessor> postProcessors = loadPostProcessors();
 		postProcessors.add(this);
 		AnnotationAwareOrderComparator.sort(postProcessors);
 		for (EnvironmentPostProcessor postProcessor : postProcessors) {
-			postProcessor.postProcessEnvironment(event.getEnvironment(),
-					event.getSpringApplication());
+			postProcessor.postProcessEnvironment(event.getEnvironment(), event.getSpringApplication());
 		}
 	}
 
@@ -184,9 +182,14 @@ public class ConfigFileApplicationListener
 				getClass().getClassLoader());
 	}
 
+	/**
+	 * 环境后置处理
+	 * @param environment the environment to post-process
+	 * @param application the application to which the environment belongs
+	 */
 	@Override
-	public void postProcessEnvironment(ConfigurableEnvironment environment,
-			SpringApplication application) {
+	public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
+		// 添加资源处理器
 		addPropertySources(environment, application.getResourceLoader());
 	}
 
@@ -201,9 +204,10 @@ public class ConfigFileApplicationListener
 	 * @param resourceLoader the resource loader
 	 * @see #addPostProcessors(ConfigurableApplicationContext)
 	 */
-	protected void addPropertySources(ConfigurableEnvironment environment,
-			ResourceLoader resourceLoader) {
+	protected void addPropertySources(ConfigurableEnvironment environment, ResourceLoader resourceLoader) {
 		RandomValuePropertySource.addToEnvironment(environment);
+
+		// 开始加载
 		new Loader(environment, resourceLoader).load();
 	}
 
@@ -323,12 +327,15 @@ public class ConfigFileApplicationListener
 			this.processedProfiles = new LinkedList<>();
 			this.activatedProfiles = false;
 			this.loaded = new LinkedHashMap<>();
+
 			initializeProfiles();
+
 			while (!this.profiles.isEmpty()) {
 				Profile profile = this.profiles.poll();
 				if (profile != null && !profile.isDefaultProfile()) {
 					addProfileToEnvironment(profile.getName());
 				}
+
 				load(profile, this::getPositiveProfileFilter,
 						addToLoaded(MutablePropertySources::addLast, false));
 				this.processedProfiles.add(profile);
@@ -439,13 +446,14 @@ public class ConfigFileApplicationListener
 			};
 		}
 
-		private void load(Profile profile, DocumentFilterFactory filterFactory,
-				DocumentConsumer consumer) {
+		private void load(Profile profile, DocumentFilterFactory filterFactory, DocumentConsumer consumer) {
+
 			getSearchLocations().forEach((location) -> {
 				boolean isFolder = location.endsWith("/");
 				Set<String> names = isFolder ? getSearchNames() : NO_SEARCH_NAMES;
-				names.forEach(
-						(name) -> load(location, name, profile, filterFactory, consumer));
+
+				names.forEach((name) ->
+						load(location, name, profile, filterFactory, consumer));
 			});
 		}
 
@@ -453,6 +461,8 @@ public class ConfigFileApplicationListener
 				DocumentFilterFactory filterFactory, DocumentConsumer consumer) {
 			if (!StringUtils.hasText(name)) {
 				for (PropertySourceLoader loader : this.propertySourceLoaders) {
+
+					// 判断支持加载
 					if (canLoadFileExtension(loader, location)) {
 						load(loader, location, profile,
 								filterFactory.getDocumentFilter(profile), consumer);

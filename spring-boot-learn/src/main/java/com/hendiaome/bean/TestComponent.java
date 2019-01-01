@@ -7,9 +7,9 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ComponentBena implements BeanPostProcessor {
+public class TestComponent implements BeanPostProcessor {
 
-	public ComponentBena() {
+	public TestComponent() {
 		//System.out.println("### ComponentBena 构造");
 	}
 

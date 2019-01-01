@@ -346,7 +346,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		}
 
 		// Create proxy if we have advice.
-		// step1: 获取拦截器 (AbstractAdvisorAutoProxyCreator)
+		// step1: 获取拦截器 (AbstractAdvisorAutoProxyCreator) 获取到 ExposeInvocationInterceptor, InstantiationModelAwarePointcutAdvisorImpl
 		Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, null);
 
 		if (specificInterceptors != DO_NOT_PROXY) {

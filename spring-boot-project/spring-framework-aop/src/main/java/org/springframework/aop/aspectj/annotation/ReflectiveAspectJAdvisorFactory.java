@@ -123,7 +123,9 @@ public class ReflectiveAspectJAdvisorFactory extends AbstractAspectJAdvisorFacto
 
 		List<Advisor> advisors = new ArrayList<>();
 		for (Method method : getAdvisorMethods(aspectClass)) {
+			// InstantiationModelAwarePointcutAdvisorImpl
 			Advisor advisor = getAdvisor(method, lazySingletonAspectInstanceFactory, advisors.size(), aspectName);
+
 			if (advisor != null) {
 				advisors.add(advisor);
 			}

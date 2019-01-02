@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestAspect {
 
+	@Before("execution(* com.hendiaome.bean.TestComponent.foo(..))")
+	public void before() {
+		System.out.println("### before");
+	}
+
 	@After("execution(* com.hendiaome.bean.TestComponent.foo(..))")
 	public void after() {
 		System.out.println("### alter");

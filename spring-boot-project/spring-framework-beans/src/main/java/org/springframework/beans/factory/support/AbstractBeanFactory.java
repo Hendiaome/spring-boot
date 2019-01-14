@@ -261,11 +261,13 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		else {
 			// Fail if we're already creating this bean instance:
 			// We're assumably within a circular reference.
+			// 上下文中发现重复bean则认为循环引用
 			if (isPrototypeCurrentlyInCreation(beanName)) {
 				throw new BeanCurrentlyInCreationException(beanName);
 			}
 
 			// Check if bean definition exists in this factory.
+			// springMVC父子容器
 			BeanFactory parentBeanFactory = getParentBeanFactory();
 			if (parentBeanFactory != null && !containsBeanDefinition(beanName)) {
 				// Not found -> check parent.
@@ -292,6 +294,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			}
 
 			try {
+				// 类似gc根搜索, 知道顶级bean然后好初始化
 				final RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
 				checkMergedBeanDefinition(mbd, beanName, args);
 
@@ -303,6 +306,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 							throw new BeanCreationException(mbd.getResourceDescription(), beanName,
 									"Circular depends-on relationship between '" + beanName + "' and '" + dep + "'");
 						}
+
+						// 获取依赖的bean
 						registerDependentBean(dep, beanName);
 						try {
 							getBean(dep);
@@ -315,9 +320,11 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				}
 
 				// Create bean instance.
+				// 单例模式
 				if (mbd.isSingleton()) {
 					sharedInstance = getSingleton(beanName, () -> {
 						try {
+							// 创建bean(AbstractAutowireCapableBeanFactory)
 							return createBean(beanName, mbd, args);
 						}
 						catch (BeansException ex) {
@@ -328,11 +335,13 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 							throw ex;
 						}
 					});
+
+					// 最后获取实例
 					bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
 				}
-
 				else if (mbd.isPrototype()) {
 					// It's a prototype -> create a new instance.
+					// prototype模式
 					Object prototypeInstance = null;
 					try {
 						beforePrototypeCreation(beanName);

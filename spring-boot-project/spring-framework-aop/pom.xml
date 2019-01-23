@@ -11,8 +11,8 @@
 		<relativePath>../spring-boot-parent</relativePath>
 	</parent>
 
-	<name>spring-framework-beans</name>
-	<description>spring-framework-beans</description>
+	<name>spring-framework-aop</name>
+	<description>spring-framework-aop</description>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-framework-aop</artifactId>
 	<version>5.1.4</version>
